@@ -1,0 +1,23 @@
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Invalid clingcon
+      run: |
+        sudo add-apt-repository ppa:potassco/wip
+        sudo apt-get update
+        sudo apt-get install clingcon
+    - name: Test clingcon
+      run: |
+        clingcon --version
+        echo "a." | clingcon
+
